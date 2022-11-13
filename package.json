@@ -1,12 +1,13 @@
 {
   "name": "reminate",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.mjs",
   "repository": "https://github.com/spuuntries/reminate.git",
   "author": "spuun <kek@spuun.art>",
-  "license": "MIT",
+  "license": "AGPL-3.0-only",
   "dependencies": {
     "file-type": "^18.0.0",
     "playwright": "^1.27.1"
-  }
+  },
+  "private": true
 }
