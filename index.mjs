@@ -16,13 +16,13 @@ async function newLaunch() {
  * @param {Object} [options] - {Optional} Optional args.
  * @param {string} [options.mime] - {Optional} MIME type of the Image, will use magic numbers instead if not specified.
  * @param {boolean} [options.v] - {Optional} Debug logging.
- * @returns {number} Probability of AI-generation.
+ * @returns {Promise<number>} Probability of AI-generation.
  */
 async function scan(img, options) {
   if (!options) options = {};
   const v = options.v,
-    mime = options.mime;
-  console.time("exec");
+    mime = options.mime,
+    ftime = performance.now();
   if (v) logger("Launching page...");
   const page = await newLaunch();
   if (v) logger("Launched");
@@ -61,9 +61,8 @@ async function scan(img, options) {
   await page.close();
   if (v) logger("Closed.");
 
-  if (v) logger("Closing page...");
-  if (v) logger("Exec took");
-  if (v) console.timeEnd("exec");
+  const stime = Math.floor((performance.now() - ftime) / 1000);
+  if (v) logger("Exec took: " + stime.toString() + "s");
   return Number(result);
 }
 
